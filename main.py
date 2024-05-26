@@ -19,23 +19,28 @@ def display_manu():
 
 def section1():
     pass
+
+
 def section2():
     pass
+
+
 def section3():
     pass
 
-train_employee_list = []
 
-a = display_manu()
-if a == 1:
+train_employee_list = list()
+
+number = display_manu()
+if number == 1:
     pass
-elif a == 2:
+elif number == 2:
     pass
-elif a == 3:
+elif number == 3:
     pass
-elif a == 4:
+elif number == 4:
     print("Bye Bye Nasr!")
     exit()
 else:
-    print ("your number was out of range. please enter again !")
+    print("your number was out of range. please enter again !")
     display_manu()
