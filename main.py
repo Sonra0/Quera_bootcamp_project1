@@ -49,9 +49,8 @@ class User:
         username = input("enter your username:")
         
         print("(press 0 if you want to exit)")
-        user_1 = input()
-        if exit_0(user_1):
-            main_menu() 
+        if username or password == 0:
+            main_menu()
             
         for user in self.users:
             if any(user.username == username or user.email == email):
@@ -71,9 +70,8 @@ class User:
         password = input("Enter your password:")
         
         print("(press 0 if you want to exit)")
-        user_2 = input()
-        if exit_0(user_2):
-            main_menu() 
+        if username or password == 0:
+            main_menu()
             
         for user in self.users:
             if user.username == username and user.password == password:
