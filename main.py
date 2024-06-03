@@ -22,6 +22,10 @@ elif a == 4:
 else:
     pass
 
+def exit_0(a):
+           if a == 0:
+                return True
+
 class User:
     def __init__(self,name,email,username,password,wallet):
         self.name = name
@@ -29,24 +33,26 @@ class User:
         self.username = username
         self.password = password
         self.wallet = 0
-
-    def exit_0(a):
-           if a == 0:
-                return False
                                                
-    def add_to_wallet(self):
+                                                                  #کیف پول
+    def add_to_wallet(self, user):
         amount = int(input("Enter amount to add to your wallet: "))
         self.wallet += amount
         print(f"Added {amount} to your wallet. Current balance: {self.wallet}")
 
+
+                                                                          #ثبت نام کاربر
     def register(self):
 
         name = input("Enter your name:")
         email = input("Enter your email:")
         username = input("enter your username:")
+        
         print("(press 0 if you want to exit)")
-        register_1 = input()
-        exit_0(register_1)
+        user_1 = input()
+        if exit_0(user_1):
+            main_menu() 
+            
         for user in self.users:
             if any(user.username == username or user.email == email):
                 print("Username or email already exist.Pleas try again.")
@@ -57,14 +63,18 @@ class User:
                 print("Registration successful")
                 return
                 
+                                                                        #ورود کاربر
 
     def login(self):
                     
         username = input("Enter your username:")
         password = input("Enter your password:")
+        
         print("(press 0 if you want to exit)")
-        login_1 = input()
-        exit_0(login_1)
+        user_2 = input()
+        if exit_0(user_2):
+            main_menu() 
+            
         for user in self.users:
             if user.username == username and user.password == password:
                 print("Welcome to the train ticket purchase system.")
@@ -74,13 +84,15 @@ class User:
                 print("Incorrect username or password. please try again.")
                 self.login()
 
-            def user_menu(self, user):
+        
+                                                                         #منو کاربر
+    def user_menu(self, user):
 
         print("User Panel")
         print("1. Buy ticket")
         print("2. Edit user informatino")
         print("3. Logout")
-        print("4.wallet")
+        print("4. wallet")
 
         choice = input("Enter your choice:")
         if choice == 1 :
@@ -95,6 +107,9 @@ class User:
 
         else:
             print("Invalid choice. Please try again")
+
+
+                                                              #ویرایش اطلاعات کاربری
 
 def edit_user_info(self, user):
     
@@ -123,13 +138,18 @@ def edit_user_info(self, user):
         return
     else:
         print("Invalid choice. Please try again.")
-                                                                                
+        
+                                                                        
+                                                                  #نمایش لیست قطار
 def train_list():   
+
     print("Available Trains:")
-for i in train_list:        
+
+for i in train_list:      
                     print("train name=" ,i, "quality="globals()[i].quality "capacity="globals()[i].capacity "price="globals()[i].price)
                     print("--------------")     
 
+                                                                         #خرید بلیط
 def buy_ticket():
     train_name = input("Enter the name of the train you want:")
 
@@ -137,13 +157,22 @@ def buy_ticket():
                      print("Train not found. Please check the train name and try again.")
 
 num_tickets = int(input("Enter the number of tickets you want:"))
+
 if num_tickets > globals()[i].capacity:
                      print("Insufficient capacity. Please choose a different train or reduce the number of tickets")
+
+total_cost = globals()[i].price * num_tickets
+if total_cost > User.add_to_wallet:
+    print("Insufficient finds in your wallet.")
+    exit
+
 elif globals()[i].capacity == 0:
                        print(f"Capacity for {globals()[i].name} is full. choose another train or reduce the number of tickets.")
 else:
                         globals()[i].capacity -= num_tickets
                         print("Tickets purchased successfully")
+                        User.add_to_wallet -= total_cost
+                        print(f"Remaining wallet balance:{User.add_to_wallet}")
 
 def main_menu():
             print("Main Menu:")
@@ -154,9 +183,9 @@ def main_menu():
             choice = input("Enter you choice:")
 
             if choice == 1 :
-                train_list.register()
+                User.register()
             elif choice == 2 :
-                train_list.login()   
+                User.login()   
             elif choice == 3 :
                 print("Goodbae")
                 exit
