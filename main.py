@@ -242,7 +242,7 @@ def section1():
                     print("Enter username of the employee you want to delete(enter 0 to exit):", end=" ")
                     del_user = input()
                     if exit_0(del_user):
-                        admin_pannel()
+                        continue
                     if del_user in train_employee_list:
                         del globals()[del_user]
                         train_employee_list.remove(del_user)
